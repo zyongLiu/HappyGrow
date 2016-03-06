@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "F:\\AndroidStudioProject\\HappyGrow\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\indicator_arrow.png",
+        "source": "F:\\AndroidStudioProject\\HappyGrow\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\indicator_arrow.png"
+    },
+    {
+        "merged": "F:\\AndroidStudioProject\\HappyGrow\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_rotate.png",
+        "source": "F:\\AndroidStudioProject\\HappyGrow\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "F:\\AndroidStudioProject\\HappyGrow\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_flip.png",
+        "source": "F:\\AndroidStudioProject\\HappyGrow\\library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "F:\\AndroidStudioProject\\HappyGrow\\pull_refresh_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_rotate.png",
+        "source": "F:\\AndroidStudioProject\\HappyGrow\\pull_refresh_library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "F:\\AndroidStudioProject\\HappyGrow\\pull_refresh_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\indicator_arrow.png",
+        "source": "F:\\AndroidStudioProject\\HappyGrow\\pull_refresh_library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\indicator_arrow.png"
+    },
+    {
+        "merged": "F:\\AndroidStudioProject\\HappyGrow\\pull_refresh_library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\default_ptr_flip.png",
+        "source": "F:\\AndroidStudioProject\\HappyGrow\\pull_refresh_library\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\default_ptr_flip.png"
+    }
+]

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_android"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Android" />
+        <item
+            android:id="@+id/nav_ios"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="iOS" />
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="休息视频" />
+        <item
+            android:id="@+id/nav_velfare"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="福利" />
+        <item
+            android:id="@+id/nav_resource"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="拓展资源" />
+        <item
+            android:id="@+id/nav_web"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="前端" />
+        <item
+            android:id="@+id/nav_recommend"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="瞎推荐" />
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="App" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
