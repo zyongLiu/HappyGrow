@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
 
 import com.liu.happygrow.R;
 import com.liu.happygrow.activity.WebViewActivity;
@@ -51,6 +52,8 @@ public class BaseListFragment extends Fragment implements XListView.IXListViewLi
     private boolean isRefresh=false;
     private boolean isLoadingMore=false;
 
+    private ProgressBar pgb;
+
     public static BaseListFragment newInstance(String type) {
         BaseListFragment f=new BaseListFragment();
         Bundle args=new Bundle();
@@ -70,6 +73,8 @@ public class BaseListFragment extends Fragment implements XListView.IXListViewLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_android,container,false);
         xlv_content= (XListView) view.findViewById(R.id.xlv_content);
+        pgb= (ProgressBar) view.findViewById(R.id.pgb);
+        pgb.setVisibility(View.VISIBLE);
         xlv_content.setPullLoadEnable(true);
         xlv_content.setXListViewListener(this);
         setData();
@@ -103,12 +108,13 @@ public class BaseListFragment extends Fragment implements XListView.IXListViewLi
                     @Override
                     public void onError(Call call, Exception e) {
                         e.printStackTrace();
+                        pgb.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onResponse(List<GanHuo> response) {
                         LogUtils.i(response.toString());
-
+                        pgb.setVisibility(View.GONE);
                         if (isRefresh) {
                             ganhuo.clear();
                             isRefresh = false;

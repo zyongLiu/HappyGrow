@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.WebViewActivity"/>
+        <activity android:name=".activity.ImageActivity"/>
     </application>
 
 </manifest>

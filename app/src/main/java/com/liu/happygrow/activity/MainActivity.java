@@ -104,19 +104,19 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_android) {
             ft.replace(R.id.fl_content, BaseListFragment.newInstance("Android"));
         } else if (id == R.id.nav_ios) {
-
+            ft.replace(R.id.fl_content, BaseListFragment.newInstance("iOS"));
         } else if (id == R.id.nav_video) {
-
+            ft.replace(R.id.fl_content, BaseListFragment.newInstance("休息视频"));
         } else if (id == R.id.nav_velfare) {
             ft.replace(R.id.fl_content, VelfareFragment.newInstance("福利"));
         } else if (id == R.id.nav_resource) {
-
+            ft.replace(R.id.fl_content, BaseListFragment.newInstance("拓展资源"));
         } else if (id == R.id.nav_web) {
-
+            ft.replace(R.id.fl_content, BaseListFragment.newInstance("前端"));
         } else if (id == R.id.nav_recommend) {
-
+            ft.replace(R.id.fl_content, BaseListFragment.newInstance("all"));
         }else if (id == R.id.nav_app) {
-
+            ft.replace(R.id.fl_content, BaseListFragment.newInstance("Android"));
         }
 
 

@@ -28,8 +28,8 @@ dependencies {
     compile 'com.zhy:okhttputils:2.3.4'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile project(':pull_refresh_library')
     compile 'com.etsy.android.grid:library:1.0.5'
     // see changelog
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile project(':imagelibrary')
 }

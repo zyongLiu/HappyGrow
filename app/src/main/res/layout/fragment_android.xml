@@ -9,4 +9,11 @@
         android:layout_height="match_parent">
     </com.liu.happygrow.view.xlistview.XListView>
 
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/pgb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
 </RelativeLayout>
