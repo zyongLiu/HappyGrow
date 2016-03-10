@@ -1,7 +1,11 @@
 package com.liu.happygrow.activity;
 
+import android.animation.Animator;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,13 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.liu.happygrow.R;
+import com.liu.happygrow.colorUi.util.ColorUiUtil;
+import com.liu.happygrow.colorUi.util.SharedPreferencesMgr;
 import com.liu.happygrow.fragment.AndroidFragment;
 import com.liu.happygrow.fragment.BaseListFragment;
 import com.liu.happygrow.fragment.VelfareFragment;
+import com.liu.happygrow.view.xlistview.CircleTransform;
 import com.liu.happygrow.view.xlistview.XListView;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,6 +40,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(SharedPreferencesMgr.getInt("theme", 0) == 1) {
+            SharedPreferencesMgr.setInt("theme", 0);
+            setTheme(R.style.theme_1);
+        } else {
+            SharedPreferencesMgr.setInt("theme", 1);
+            setTheme(R.style.theme_2);
+        }
+
         setContentView(R.layout.activity_main);
 //        EventBus.getDefault().register(this);
         initUI();
@@ -40,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fm=getFragmentManager();
         FragmentTransaction transaction=fm.beginTransaction();
         BaseListFragment afm=BaseListFragment.newInstance("Android");
-        transaction.replace(R.id.fl_content,afm);
+        transaction.replace(R.id.fl_content, afm);
         transaction.commit();
     }
 
@@ -66,6 +86,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ImageView imageView= (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        Picasso.with(this).load(R.drawable.meizis).transform(new CircleTransform()).into(imageView);
+
 
         fl_content= (FrameLayout) findViewById(R.id.fl_content);
     }
@@ -123,8 +147,8 @@ public class MainActivity extends AppCompatActivity
 
         else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_change) {
+            changeTheme();
         }
 
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -139,5 +163,52 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
 //        EventBus.getDefault().unregister(this);
+    }
+
+    private void changeTheme(){
+        if(SharedPreferencesMgr.getInt("theme", 0) == 1) {
+            SharedPreferencesMgr.setInt("theme", 0);
+            setTheme(R.style.theme_1);
+        } else {
+            SharedPreferencesMgr.setInt("theme", 1);
+            setTheme(R.style.theme_2);
+        }
+        final View rootView = getWindow().getDecorView();
+        if(Build.VERSION.SDK_INT >= 14) {
+            rootView.setDrawingCacheEnabled(true);
+            rootView.buildDrawingCache(true);
+            final Bitmap localBitmap = Bitmap.createBitmap(rootView.getDrawingCache());
+            rootView.setDrawingCacheEnabled(false);
+            if (null != localBitmap && rootView instanceof ViewGroup) {
+                final View localView2 = new View(getApplicationContext());
+                localView2.setBackgroundDrawable(new BitmapDrawable(getResources(), localBitmap));
+                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                ((ViewGroup) rootView).addView(localView2, params);
+                localView2.animate().alpha(0).setDuration(400).setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        ColorUiUtil.changeTheme(rootView, getTheme());
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ((ViewGroup) rootView).removeView(localView2);
+                        localBitmap.recycle();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                }).start();
+            }
+        } else {
+            ColorUiUtil.changeTheme(rootView, getTheme());
+        }
     }
 }

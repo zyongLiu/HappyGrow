@@ -11,7 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/pull_refresh_library" />
+            <option value="$PROJECT_DIR$/imagelibrary" />
           </set>
         </option>
       </GradleProjectSettings>

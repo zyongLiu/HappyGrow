@@ -8,4 +8,15 @@
     <color name="google_blue">#0057e7</color>
     <color name="google_green">#008744</color>
     <color name="google_yellow">#ffa700</color>
+
+
+    <color name="bg_main_normal">#ffffff</color>
+    <color name="textcolor_main_normal">#000000</color>
+    <color name="bg_main_dark">#000000</color>
+    <color name="textcolor_main_dark">#ffffff</color>
+
+    <color name="bg_second_normal">#0000ff</color>
+    <color name="textcolor_second_normal">#00ff00</color>
+    <color name="bg_second_dark">#ffffff</color>
+    <color name="textcolor_second_dark">#000000</color>
 </resources>

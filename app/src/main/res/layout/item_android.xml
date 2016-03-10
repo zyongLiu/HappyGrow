@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <com.liu.happygrow.colorUi.widget.ColorTextView
         android:id="@+id/tv_ganhuo_title"
         android:layout_marginTop="9dp"
         android:layout_marginBottom="9dp"
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:textColor="?attr/main_textcolor"
         android:layout_marginLeft="18dp"
         android:text="标题"/>
 
@@ -22,14 +23,16 @@
         android:paddingBottom="9dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
+        <com.liu.happygrow.colorUi.widget.ColorTextView
             android:id="@+id/tv_ganhuo_from"
             android:layout_width="wrap_content"
+            android:textColor="?attr/main_textcolor"
             android:layout_height="wrap_content"
             android:text="来源"/>
-        <TextView
+        <com.liu.happygrow.colorUi.widget.ColorTextView
             android:id="@+id/tv_ganhuo_time"
             android:layout_alignParentRight="true"
+            android:textColor="?attr/main_textcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="时间"/>

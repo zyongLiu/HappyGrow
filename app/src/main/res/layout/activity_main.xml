@@ -14,12 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.NavigationView
+    <com.liu.happygrow.colorUi.widget.ColorFrameLayout
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="?attr/main_bg"
         android:fitsSystemWindows="true"
+        app:itemTextColor="?attr/second_textcolor"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 

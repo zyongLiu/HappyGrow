@@ -18,6 +18,7 @@ import com.liu.happygrow.adapter.base.CommonAdapter;
 import com.liu.happygrow.adapter.base.ViewHolder;
 import com.liu.happygrow.bean.GanHuo;
 import com.liu.happygrow.callback.GanHuoCallBack;
+import com.liu.happygrow.colorUi.widget.ColorListView;
 import com.liu.happygrow.constant.System_constant;
 import com.liu.happygrow.utils.LogUtils;
 import com.liu.happygrow.utils.PreferenceUtil;
@@ -39,7 +40,7 @@ import okhttp3.Call;
 public class BaseListFragment extends Fragment implements XListView.IXListViewListener{
 
     private View view;
-    private XListView xlv_content;
+    private ColorListView xlv_content;
 
     private int PAGER_COUNT=20;
     private int pager_num=1;
@@ -72,7 +73,7 @@ public class BaseListFragment extends Fragment implements XListView.IXListViewLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_android,container,false);
-        xlv_content= (XListView) view.findViewById(R.id.xlv_content);
+        xlv_content= (ColorListView) view.findViewById(R.id.xlv_content);
         pgb= (ProgressBar) view.findViewById(R.id.pgb);
         pgb.setVisibility(View.VISIBLE);
         xlv_content.setPullLoadEnable(true);
