@@ -1,7 +1,9 @@
 package com.liu.happygrow.fragment;
 
+import android.app.ActivityOptions;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -38,11 +40,11 @@ import okhttp3.Call;
 /**
  * Created by Liu on 2016/3/6.
  */
-public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,GirlAdapter.OnItemActionListener{
+public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, GirlAdapter.OnItemActionListener {
     private View view;
-    private int PAGER_COUNT=10;
-    private int pager_num=1;
-    private String url="";
+    private int PAGER_COUNT = 10;
+    private int pager_num = 1;
+    private String url = "";
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -80,10 +82,10 @@ public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_velfare,container,false);
+        view = inflater.inflate(R.layout.fragment_velfare, container, false);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
 
-        pgb= (ProgressBar) view.findViewById(R.id.pgb);
+        pgb = (ProgressBar) view.findViewById(R.id.pgb);
         pgb.setVisibility(View.VISIBLE);
 
         swipeRefreshLayout.setColorSchemeResources(
@@ -110,6 +112,7 @@ public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
         });
         swipeRefreshLayout.setOnRefreshListener(this);
+
         mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(gridLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
@@ -118,17 +121,16 @@ public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
         });
 
 
-
         return view;
     }
 
-    private boolean isLoading=false;
+    private boolean isLoading = false;
 
     private void simulateLoadMoreData() {
 //        Toast.makeText(getActivity(),"simulateLoadMoreData",Toast.LENGTH_SHORT).show();
 //        stringAdapter.notifyDataSetChanged();
         pager_num++;
-        isLoading=true;
+        isLoading = true;
         setData();
     }
 
@@ -143,9 +145,9 @@ public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
     /**
      * 设置数据，分页，分类型，分条数
      */
-    protected void setData(){
+    protected void setData() {
 
-        url= System_constant.IP+"data/"+getArguments().getString("type")+"/"+PAGER_COUNT+"/"+pager_num;
+        url = System_constant.IP + "data/" + getArguments().getString("type") + "/" + PAGER_COUNT + "/" + pager_num;
         OkHttpUtils
                 .get()
                 .url(url)
@@ -155,14 +157,14 @@ public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
                     public void onError(Call call, Exception e) {
                         pgb.setVisibility(View.GONE);
                         e.printStackTrace();
-                        if (isRefresh){
-                            Toast.makeText(getActivity(),"刷新失败",Toast.LENGTH_SHORT).show();
-                            isRefresh=false;
+                        if (isRefresh) {
+                            Toast.makeText(getActivity(), "刷新失败", Toast.LENGTH_SHORT).show();
+                            isRefresh = false;
                             swipeRefreshLayout.setRefreshing(false);
-                        }else if (isLoading){
-                            isLoading=false;
+                        } else if (isLoading) {
+                            isLoading = false;
                             pager_num--;
-                            Toast.makeText(getActivity(),"加载失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -170,54 +172,76 @@ public class VelfareFragment extends Fragment implements SwipeRefreshLayout.OnRe
                     public void onResponse(List<GanHuo> response) {
                         pgb.setVisibility(View.GONE);
                         LogUtils.i(response.toString());
-                        if (isRefresh){
-                            ganhuo=response;
+                        /**
+                         * 刷新
+                         */
+                        if (isRefresh) {
+                            ganhuo.clear();
+                            ganhuo.addAll(response);
+//                            ganhuo=response;
                             swipeRefreshLayout.setRefreshing(false);
                             stringAdapter.notifyDataSetChanged();
-                            isRefresh=false;
-                        }else if (isLoading){
-                            if (response==null||response.size()==0){
+                            isRefresh = false;
+                        }
+                        /**
+                         * 加载更多
+                         */
+                        else if (isLoading) {
+                            if (response == null || response.size() == 0) {
                                 pager_num--;
-                                Toast.makeText(getActivity(),"无更多资源",Toast.LENGTH_SHORT).show();
-                            }else {
+                                Toast.makeText(getActivity(), "无更多资源", Toast.LENGTH_SHORT).show();
+                            } else {
                                 ganhuo.addAll(response);
                                 stringAdapter.notifyDataSetChanged();
                             }
-                            isLoading=false;
+                            isLoading = false;
                         }
+                        /**
+                         * 第一次加载
+                         */
                         else {
-                        refreshAdapter = new GirlAdapter(ganhuo=response, getActivity());
+                            refreshAdapter = new GirlAdapter(ganhuo = response, getActivity());
                             refreshAdapter.setOnItemActionListener(VelfareFragment.this);
-                        stringAdapter = new HeaderViewRecyclerAdapter(refreshAdapter);
-                        mRecyclerView.setAdapter(stringAdapter);
+                            stringAdapter = new HeaderViewRecyclerAdapter(refreshAdapter);
                             createLoadMoreView();
+                            mRecyclerView.setAdapter(stringAdapter);
                         }
                     }
                 });
     }
 
-    private boolean isRefresh=false;
+    private boolean isRefresh = false;
 
     @Override
     public void onRefresh() {
 //        Toast.makeText(getActivity(),"Refresh",Toast.LENGTH_SHORT).show();
-        isRefresh=true;
+        isRefresh = true;
         setData();
-        pager_num=0;
+        pager_num = 0;
     }
 
 
     @Override
     public void onItemClickListener(View v, int pos) {
-        Toast.makeText(getActivity(),"onItemClickListener"+pos,Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(getActivity(), ImageActivity.class);
-        intent.putExtra("url",ganhuo.get(pos).getUrl());
-        startActivity(intent);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Intent intent = new Intent(getActivity(), ImageActivity.class);
+            intent.putExtra("url", ganhuo.get(pos).getUrl());
+// shareView: 需要共享的视图
+// "shareName": 设置的android:transitionName="shareName"
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(getActivity(), v.findViewById(R.id.iv_velfare), "image");
+            startActivity(intent, options.toBundle());
+        } else {
+            Toast.makeText(getActivity(), "onItemClickListener" + pos, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), ImageActivity.class);
+            intent.putExtra("url", ganhuo.get(pos).getUrl());
+            startActivity(intent);
+        }
     }
 
     @Override
     public boolean onItemLongClickListener(View v, int pos) {
-        Toast.makeText(getActivity(),"onItemLongClickListener"+pos,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "onItemLongClickListener" + pos, Toast.LENGTH_SHORT).show();
         return false;
     }
 }

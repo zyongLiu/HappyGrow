@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.liu.happygrow.colorUi.widget.ColorListView
         android:id="@+id/xlv_content"
         android:background="?attr/main_bg"

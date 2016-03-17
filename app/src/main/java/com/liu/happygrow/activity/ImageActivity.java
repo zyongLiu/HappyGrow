@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.liu.happygrow.R;
+import com.liu.happygrow.colorUi.util.SharedPreferencesMgr;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
 
@@ -30,6 +31,15 @@ public class ImageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(SharedPreferencesMgr.getInt("theme", 0) == 1) {
+            SharedPreferencesMgr.setInt("theme", 0);
+            setTheme(R.style.theme_1);
+        } else {
+            SharedPreferencesMgr.setInt("theme", 1);
+            setTheme(R.style.theme_2);
+        }
+
         setContentView(R.layout.activity_image_display);
         url=getIntent().getStringExtra("url");
         imageview= (SubsamplingScaleImageView) findViewById(R.id.imageView);

@@ -26,13 +26,13 @@
         <com.liu.happygrow.colorUi.widget.ColorTextView
             android:id="@+id/tv_ganhuo_from"
             android:layout_width="wrap_content"
-            android:textColor="?attr/main_textcolor"
+            android:textColor="?attr/second_textcolor"
             android:layout_height="wrap_content"
             android:text="来源"/>
         <com.liu.happygrow.colorUi.widget.ColorTextView
             android:id="@+id/tv_ganhuo_time"
             android:layout_alignParentRight="true"
-            android:textColor="?attr/main_textcolor"
+            android:textColor="?attr/second_textcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="时间"/>

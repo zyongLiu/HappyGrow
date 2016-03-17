@@ -13,10 +13,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -39,16 +41,24 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            // 允许使用transitions
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            // 设置一个exit transition
+            getWindow().setExitTransition(new Explode());
+        }
         super.onCreate(savedInstanceState);
 
-        if(SharedPreferencesMgr.getInt("theme", 0) == 1) {
+
+
+        if (SharedPreferencesMgr.getInt("theme", 0) == 1) {
             SharedPreferencesMgr.setInt("theme", 0);
             setTheme(R.style.theme_1);
         } else {
             SharedPreferencesMgr.setInt("theme", 1);
             setTheme(R.style.theme_2);
         }
-
         setContentView(R.layout.activity_main);
 //        EventBus.getDefault().register(this);
         initUI();
@@ -57,15 +67,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setDefaultFragment() {
-        FragmentManager fm=getFragmentManager();
-        FragmentTransaction transaction=fm.beginTransaction();
-        BaseListFragment afm=BaseListFragment.newInstance("Android");
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        BaseListFragment afm = BaseListFragment.newInstance("Android");
         transaction.replace(R.id.fl_content, afm);
         transaction.commit();
     }
 
 
-    private void initUI(){
+    private void initUI() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -87,11 +97,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageView imageView= (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        ImageView imageView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
         Picasso.with(this).load(R.drawable.meizis).transform(new CircleTransform()).into(imageView);
 
 
-        fl_content= (FrameLayout) findViewById(R.id.fl_content);
+        fl_content = (FrameLayout) findViewById(R.id.fl_content);
     }
 
 
@@ -139,13 +149,9 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.fl_content, BaseListFragment.newInstance("前端"));
         } else if (id == R.id.nav_recommend) {
             ft.replace(R.id.fl_content, BaseListFragment.newInstance("all"));
-        }else if (id == R.id.nav_app) {
+        } else if (id == R.id.nav_app) {
             ft.replace(R.id.fl_content, BaseListFragment.newInstance("Android"));
-        }
-
-
-
-        else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_change) {
             changeTheme();
@@ -165,8 +171,8 @@ public class MainActivity extends AppCompatActivity
 //        EventBus.getDefault().unregister(this);
     }
 
-    private void changeTheme(){
-        if(SharedPreferencesMgr.getInt("theme", 0) == 1) {
+    private void changeTheme() {
+        if (SharedPreferencesMgr.getInt("theme", 0) == 1) {
             SharedPreferencesMgr.setInt("theme", 0);
             setTheme(R.style.theme_1);
         } else {
@@ -174,7 +180,7 @@ public class MainActivity extends AppCompatActivity
             setTheme(R.style.theme_2);
         }
         final View rootView = getWindow().getDecorView();
-        if(Build.VERSION.SDK_INT >= 14) {
+        if (Build.VERSION.SDK_INT >= 14) {
             rootView.setDrawingCacheEnabled(true);
             rootView.buildDrawingCache(true);
             final Bitmap localBitmap = Bitmap.createBitmap(rootView.getDrawingCache());

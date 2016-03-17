@@ -11,12 +11,14 @@
 
 
     <color name="bg_main_normal">#ffffff</color>
-    <color name="textcolor_main_normal">#000000</color>
-    <color name="bg_main_dark">#000000</color>
+    <!-- 主标题-->
+    <color name="textcolor_main_normal">#1D1D1D</color>
+    <color name="bg_main_dark">#212B30</color>
     <color name="textcolor_main_dark">#ffffff</color>
 
-    <color name="bg_second_normal">#0000ff</color>
-    <color name="textcolor_second_normal">#00ff00</color>
-    <color name="bg_second_dark">#ffffff</color>
-    <color name="textcolor_second_dark">#000000</color>
+    <color name="bg_second_normal">#FFFFFF</color>
+    <!--正文-->
+    <color name="textcolor_second_normal">#818181</color>
+    <color name="bg_second_dark">#212B30</color>
+    <color name="textcolor_second_dark">#999EA0</color>
 </resources>

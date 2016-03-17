@@ -48,6 +48,8 @@ public class GirlAdapter extends RecyclerView.Adapter<GirlAdapter.ViewHolder>{
         holder.tv_velfare.setText(mGanHuoList.get(position).getPublishedAt().split("T")[0]);
         holder.tv_velfare.setVisibility(View.GONE);
         Picasso.with(context).load(mGanHuoList.get(position).getUrl())
+                .placeholder(R.drawable.ic_error_light)
+                .error(R.drawable.ic_error_light)
                 .resize(500, 800)
                 .centerCrop()
                 .into(holder.iv_velfare);
