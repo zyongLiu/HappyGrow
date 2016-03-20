@@ -31,5 +31,5 @@ dependencies {
     compile 'com.etsy.android.grid:library:1.0.5'
     // see changelog
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile project(':imagelibrary')
+    compile 'com.commit451:PhotoView:1.2.5'
 }
